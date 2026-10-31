@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il Codice della Vita</title>
+<style>
+:root{--bg:#eaf2fb;--grid:rgba(0,90,140,.08);--pan:#fff;--ink:#0c1b33;--mut:#4a5f7c;--line:#b8cbe3;--cy:#00758a;--mg:#a21fb8;--gr:#2a7a14;--am:#8a5d00;--rd:#b8321f;--glow:transparent;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#060d1f;--grid:rgba(77,232,255,.07);--pan:#0b1830;--ink:#e6f0ff;--mut:#9fb3d1;--line:#1f4470;--cy:#4de8ff;--mg:#ff7bf5;--gr:#8dff9b;--am:#ffd166;--rd:#ff8a7a;--glow:rgba(77,232,255,.55);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#060d1f;--grid:rgba(77,232,255,.07);--pan:#0b1830;--ink:#e6f0ff;--mut:#9fb3d1;--line:#1f4470;--cy:#4de8ff;--mg:#ff7bf5;--gr:#8dff9b;--am:#ffd166;--rd:#ff8a7a;--glow:rgba(77,232,255,.55);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+body{margin:0;background:var(--bg) linear-gradient(var(--grid) 1px,transparent 1px) 0 0/34px 34px;color:var(--ink);font:17px/1.65 system-ui,"Segoe UI",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:20}
+body::after{content:"";position:fixed;inset:0;background:linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/34px 34px;pointer-events:none;z-index:-1}
+.m{font-family:ui-monospace,"Cascadia Code",Menlo,Consolas,monospace}
+.w{max-width:860px;margin:0 auto;padding:0 18px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0}
+.bar .w{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.bar b{font-weight:400;color:var(--cy);font-size:14px;margin-right:4px}
+.bar button{font:14px ui-monospace,Menlo,Consolas,monospace;padding:5px 11px;border:1px solid var(--line);border-radius:4px;background:var(--pan);color:var(--ink);cursor:pointer}
+.bar button[aria-pressed=true]{border-color:var(--cy);color:var(--cy)}
+.bar button:focus-visible,a:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+.hero{padding:44px 0 10px;text-align:center}
+h1{font:700 clamp(32px,7vw,54px)/1.1 ui-monospace,Menlo,Consolas,monospace;color:var(--cy);margin:0 0 8px;text-shadow:0 0 18px var(--glow)}
+h1 em{font-style:normal;color:var(--mg)}
+.hero p.s{font-size:20px;margin:0 0 22px}
+.box{border:1px solid var(--cy);border-radius:6px;background:var(--pan);padding:14px 18px;text-align:left;font:15px/1.6 ui-monospace,Menlo,Consolas,monospace}
+.box i{color:var(--cy);font-style:normal}
+.idx{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 0}
+.idx a{font-size:14px;color:var(--mut);text-decoration:none;border-bottom:1px dotted var(--line)}
+.idx a:hover{color:var(--cy)}
+section{background:var(--pan);border:1px solid var(--line);border-left:3px solid var(--cy);border-radius:6px;padding:20px 22px 6px;margin:22px 0}
+section[hidden]{display:none}
+h2{font:700 24px/1.25 ui-monospace,Menlo,Consolas,monospace;color:var(--cy);margin:0 0 4px}
+h3{font-size:18px;margin:20px 0 4px;color:var(--mg)}
+.tg{font:13px ui-monospace,Menlo,Consolas,monospace;color:var(--mut);margin:0 0 12px}
+p{margin:8px 0 14px}
+.k{border:1px solid var(--mg);border-radius:6px;padding:10px 14px;margin:14px 0}
+.eq{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0;font:15px ui-monospace,Menlo,Consolas,monospace}
+.eq span{border:1px solid var(--line);border-radius:6px;padding:8px 12px}
+.eq .o{border:0;color:var(--cy);font-size:22px;padding:0}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:10px 0 16px}
+.c{border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.c b{display:block;color:var(--cy);margin-bottom:2px}
+.c.p2 b{color:var(--mg)}
+.tw{overflow-x:auto;margin:10px 0 16px}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:460px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--cy);font-weight:600}
+ul{padding-left:22px;margin:8px 0 14px}li{margin:5px 0}
+.A{color:var(--gr)}.T{color:var(--rd)}.C{color:var(--cy)}.G{color:var(--am)}.U{color:var(--mg)}
+.bs{font:700 18px ui-monospace,Menlo,Consolas,monospace}
+.sel{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0}
+select{font:inherit;padding:6px 10px;border-radius:6px;border:1px solid var(--line);background:var(--pan);color:var(--ink)}
+.pg{display:grid;grid-template-columns:50px 1fr 1fr;gap:6px;max-width:340px;text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace}
+.pg div{padding:10px 0;border-radius:6px}
+a.c{display:block;text-decoration:none;color:var(--ink)}
+a.c:hover{border-color:var(--cy)}
+a.c small{color:var(--mut)}
+.sv{width:100%;height:auto;max-width:720px;display:block;margin:10px 0 4px}.sv .ln{stroke:var(--line);stroke-width:2;fill:none}.sv .ph{fill:none;stroke:var(--cy);stroke-width:2.5}.sv .su{fill:none;stroke:var(--mg);stroke-width:2.5}.sv .bx{fill:none;stroke:var(--ink);stroke-width:2.5}.sv .xa{fill:none;stroke:var(--gr);stroke-width:2.5}.sv .xt{fill:none;stroke:var(--rd);stroke-width:2.5}.sv .xc{fill:none;stroke:var(--cy);stroke-width:2.5}.sv .xg{fill:none;stroke:var(--am);stroke-width:2.5}.sv .hb{stroke:var(--mut);stroke-width:2.5;stroke-dasharray:5 4}.sv text{fill:var(--ink);font:15px system-ui,sans-serif}.sv .tb{font-weight:700}.sv .ts{fill:var(--mut);font-size:13px}.sv .fa{fill:var(--gr);font-weight:700}.sv .ft{fill:var(--rd);font-weight:700}.sv .fc{fill:var(--cy);font-weight:700}.sv .fg{fill:var(--am);font-weight:700}.sv .fp{fill:var(--cy);font-weight:700}.sv .fs{fill:var(--mg)}
+.sv .cd{fill:var(--pan);stroke:var(--cy);stroke-width:2}.sv .rb{fill:none;stroke:var(--mg);stroke-width:3}.sv .rn{fill:none;stroke:var(--cy);stroke-width:3}.sv .tr{fill:none;stroke:var(--mg);stroke-width:3}.sv .aa{fill:none;stroke:var(--am);stroke-width:2.5}.sv .pep{stroke:var(--am);stroke-width:5}
+.sv .b2,.sv .cp{opacity:0}
+@keyframes scn{0%{opacity:0}4%,94%{opacity:1}99%,100%{opacity:0}}
+@keyframes rib{0%,30%{transform:translateX(0)}46%,100%{transform:translateX(75px)}}
+@keyframes t1{0%,30%{opacity:1;transform:translate(0,0)}46%,100%{opacity:0;transform:translate(-25px,-45px)}}
+@keyframes b1{0%{opacity:0}8%,100%{opacity:1}}
+@keyframes t3{0%,46%{opacity:0;transform:translate(60px,-50px)}60%,100%{opacity:1;transform:translate(0,0)}}
+@keyframes b2{0%,60%{opacity:0}72%,100%{opacity:1}}
+@keyframes c1{0%{opacity:0}4%,28%{opacity:1}31%,100%{opacity:0}}
+@keyframes c2{0%,29%{opacity:0}32%,44%{opacity:1}47%,100%{opacity:0}}
+@keyframes c3{0%,45%{opacity:0}48%,58%{opacity:1}61%,100%{opacity:0}}
+@keyframes c4{0%,60%{opacity:0}63%,92%{opacity:1}96%,100%{opacity:0}}
+@media(prefers-reduced-motion:no-preference){.sv .scn{animation:scn 14s linear infinite}.sv .rib{animation:rib 14s ease-in-out infinite}.sv .t1{animation:t1 14s ease-in-out infinite}.sv .b1{animation:b1 14s linear infinite}.sv .t3{animation:t3 14s ease-in-out infinite}.sv .b2{animation:b2 14s linear infinite}.sv .c1{animation:c1 14s linear infinite}.sv .c2{animation:c2 14s linear infinite}.sv .c3{animation:c3 14s linear infinite}.sv .c4{animation:c4 14s linear infinite}}
+.ex{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:12px 0}.ex p{margin:0 0 8px}.op{display:flex;flex-direction:column;gap:6px}.op button{font:inherit;text-align:left;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--pan);color:var(--ink);cursor:pointer}.op button:hover{border-color:var(--cy)}.op button.ok{border-color:var(--gr);color:var(--gr)}.op button.no{border-color:var(--rd);color:var(--rd)}.ex .fb{margin:8px 0 0;font-size:15px}.bt{font:inherit;padding:8px 14px;border:1px solid var(--cy);border-radius:6px;background:var(--pan);color:var(--cy);cursor:pointer;margin:6px 0 16px}
+.bar nav{display:flex;gap:6px;margin-right:10px}.bar nav a{font:14px ui-monospace,Menlo,Consolas,monospace;padding:5px 11px;border:1px solid var(--line);border-radius:4px;color:var(--ink);text-decoration:none;background:var(--pan)}.bar nav a[aria-current=page]{border-color:var(--mg);color:var(--mg)}.bk,.k a{color:var(--cy)}
+.scr{border:1px solid var(--line);border-radius:6px;background:var(--bg);margin:8px 0 14px;max-width:580px;font-size:14px}.scr .sh{padding:5px 10px;border-bottom:1px solid var(--line);color:var(--mut);font:13px ui-monospace,Menlo,Consolas,monospace}.scr .bd{padding:10px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}.fk{border:1px solid var(--line);border-radius:4px;padding:3px 10px;background:var(--pan)}.fk.on{border-color:var(--cy);color:var(--cy)}.fk.mg{border-color:var(--mg);color:var(--mg)}.df{background:rgba(255,123,245,.28);border-radius:2px}.st{counter-reset:s;list-style:none;padding:0}.st>li{counter-increment:s;border:1px solid var(--line);border-left:3px solid var(--mg);border-radius:6px;padding:10px 16px 2px;margin:14px 0}.st>li::before{content:"Passo " counter(s);display:block;font:700 13px ui-monospace,Menlo,Consolas,monospace;color:var(--mg)}
+footer{text-align:center;color:var(--mut);padding:10px 0 44px;font-size:15px}
+</style>
+</head>
+<body>
+<div class="bar"><div class="w"><nav aria-label="Pagine"><a href="#studio" id="lS" aria-current="page">Studio</a><a href="#esercitazioni" id="lE">Esercitazioni</a><a href="#laboratorio" id="lL">Laboratorio</a></nav><span id="scl" role="group" aria-label="Scala di studio" style="display:contents"><b>Scala:</b>
+<button aria-pressed="true" data-s="tutto">Tutto</button><button aria-pressed="false" data-s="globale">Globale</button><button aria-pressed="false" data-s="organismo">Organismo</button><button aria-pressed="false" data-s="cellulare">Cellulare</button><button aria-pressed="false" data-s="molecolare">Molecolare</button></span>
+</div></div>
+<div class="w">
+<div id="vS"><div class="hero">
+<h1>Il Codice della <em>Vita</em></h1>
+<p class="s">In viaggio con il Genetista: da Mendel a CRISPR</p>
+<div class="box"><i>&gt; Inizializzazione sistema… Benvenuti nel laboratorio di genetica.</i><br><br>Oggi non leggeremo un libro, ma impareremo a leggere il manuale di istruzioni degli esseri viventi. Scegli una scala in alto: dal mondo intero fino alle molecole.</div>
+<div class="idx"><a href="#genetista">Genetista</a><a href="#mendel">Mendel</a><a href="#dna">DNA</a><a href="#scoperta">Scoperta</a><a href="#rna">RNA</a><a href="#proteine">Proteine</a><a href="#cromosomi">Cromosomi</a><a href="#mutazioni">Mutazioni</a><a href="#crispr">CRISPR</a><a href="#pc">Al PC</a><a href="#esercitazioni">Esercitazioni</a></div>
+</div>
+
+<section id="genetista" data-s="globale organismo">
+<h2>Cosa fa un genetista?</h2>
+<p class="tg">Scala globale</p>
+<p>La genetica studia come i caratteri passano dai genitori ai figli e perché gli esseri viventi sono diversi. Si basa sui <b>geni</b>, tratti di DNA in posti precisi dei cromosomi. Ogni gene può avere versioni diverse, gli <b>alleli</b>.</p>
+<div class="eq"><span>Genotipo: il codice nascosto</span><span class="o">+</span><span>Ambiente</span><span class="o">=</span><span>Fenotipo: la caratteristica visibile</span></div>
+<p>I geni da soli non decidono tutto: anche l’ambiente conta. Una pianta con i geni giusti, per esempio, cresce bene solo se ha luce e acqua.</p>
+<div class="g">
+<div class="c"><b>Ricerca</b>Scoprire i geni nascosti nel DNA.</div>
+<div class="c"><b>Diagnosi</b>Leggere il codice per individuare errori, le mutazioni.</div>
+<div class="c"><b>Consulenza</b>Aiutare le famiglie a capire l’ereditarietà.</div>
+<div class="c"><b>Applicazioni</b>Sviluppare nuove cure e migliorare l’agricoltura.</div>
+</div>
+<p>La variabilità genetica nasce da tre fonti: le <b>mutazioni</b>, la <b>ricombinazione</b> nei gameti e la <b>fecondazione casuale</b>. Per questo i fratelli non sono mai uguali, tranne i gemelli identici.</p>
+</section>
+
+<section id="mendel" data-s="organismo">
+<h2>Le origini: Mendel e le tre regole della natura</h2>
+<p class="tg">Scala organismo</p>
+<p>Gregor Mendel studiò l’ereditarietà incrociando piante di pisello e ne ricavò tre leggi.</p>
+<div class="tw"><table>
+<tr><th>Legge</th><th>Che cosa dice</th><th>Esempio</th></tr>
+<tr><td>1ª, dominanza</td><td>Incrociando due individui puri con caratteri diversi, tutti i figli (F1) mostrano il carattere dominante.</td><td>Fiori viola × bianchi: tutti viola.</td></tr>
+<tr><td>2ª, segregazione</td><td>I due alleli si separano nei gameti. Nella F2 il carattere recessivo riappare in rapporto 3:1.</td><td>F1 × F1: 3 viola e 1 bianco.</td></tr>
+<tr><td>3ª, assortimento indipendente</td><td>Caratteri diversi si ereditano in modo indipendente.</td><td>Colore e forma del seme.</td></tr>
+</table></div>
+<h3>Il quadrato di Punnett: la matematica dell’eredità</h3>
+<p><b>Omozigote</b> (puro): due alleli uguali, AA o aa. <b>Eterozigote</b> (ibrido): due alleli diversi, Aa; l’allele dominante nasconde quello recessivo. Scegli i genitori e guarda il risultato (A = viola, a = bianco).</p>
+<div class="sel"><label>Genitore 1 <select id="p1"><option>AA</option><option selected>Aa</option><option>aa</option></select></label><label>Genitore 2 <select id="p2"><option>AA</option><option selected>Aa</option><option>aa</option></select></label></div>
+<div class="pg" id="pg"></div>
+<p id="pr" class="m" style="font-weight:700"></p>
+<div class="k">Ecco perché due genitori con occhi castani (Aa) possono avere un figlio con occhi azzurri (aa): c’è il 25% di probabilità che i due alleli recessivi si incontrino.</div>
+</section>
+
+<section id="dna" data-s="molecolare">
+<h2>Che cos’è un nucleotide?</h2>
+<p class="tg">Scala molecolare · il «mattone» di DNA e RNA</p>
+<div class="g">
+<div class="c"><b>1. Gruppo fosfato</b>Collega un nucleotide al successivo. Insieme allo zucchero forma lo scheletro della catena.</div>
+<div class="c p2"><b>2. Zucchero pentoso</b>Deossiribosio nel DNA, ribosio nell’RNA.</div>
+<div class="c"><b>3. Base azotata</b>Contiene l’informazione genetica.</div>
+</div>
+<svg class="sv" viewBox="0 0 720 360" role="img"><title>Disegno di un nucleotide e delle coppie di basi</title><desc>Un nucleotide formato da fosfato, zucchero e base azotata, e le coppie di basi A-T con due legami a idrogeno e C-G con tre legami a idrogeno.</desc>
+<text class="tb" x="10" y="24">Un nucleotide</text>
+<circle class="ph" cx="80" cy="100" r="30"/><text class="fp" x="80" y="107" text-anchor="middle" font-size="20">P</text>
+<line class="ln" x1="110" y1="98" x2="194" y2="92"/>
+<polygon class="su" points="230,62 266,88 252,132 208,132 194,88"/>
+<line class="ln" x1="266" y1="88" x2="345" y2="100"/>
+<rect class="bx" x="345" y="70" width="110" height="60" rx="8"/><text x="400" y="106" text-anchor="middle">Base</text>
+<text class="ts" x="475" y="105">A, T, C, G (U nell’RNA)</text>
+<text class="fp" x="80" y="170" text-anchor="middle">Fosfato</text>
+<text class="fs tb" x="230" y="170" text-anchor="middle">Zucchero</text><text class="ts" x="230" y="190" text-anchor="middle">deossiribosio o ribosio</text>
+<text x="400" y="170" text-anchor="middle" class="tb">Base azotata</text>
+<text class="tb" x="10" y="232">Le coppie di basi nella doppia elica</text>
+<rect class="xa" x="40" y="255" width="110" height="60" rx="8"/><text class="fa" x="95" y="291" text-anchor="middle">A adenina</text>
+<line class="hb" x1="150" y1="275" x2="230" y2="275"/><line class="hb" x1="150" y1="295" x2="230" y2="295"/>
+<rect class="xt" x="230" y="255" width="110" height="60" rx="8"/><text class="ft" x="285" y="291" text-anchor="middle">T timina</text>
+<text class="ts" x="190" y="340" text-anchor="middle">2 legami a idrogeno</text>
+<rect class="xc" x="380" y="255" width="110" height="60" rx="8"/><text class="fc" x="435" y="291" text-anchor="middle">C citosina</text>
+<line class="hb" x1="490" y1="270" x2="570" y2="270"/><line class="hb" x1="490" y1="285" x2="570" y2="285"/><line class="hb" x1="490" y1="300" x2="570" y2="300"/>
+<rect class="xg" x="570" y="255" width="110" height="60" rx="8"/><text class="fg" x="625" y="291" text-anchor="middle">G guanina</text>
+<text class="ts" x="530" y="340" text-anchor="middle">3 legami a idrogeno</text>
+</svg>
+<p class="tg">Schema semplificato: le vere formule chimiche delle basi sono più complesse.</p>
+<p>Le basi del DNA sono quattro: <span class="bs A">A</span> adenina, <span class="bs T">T</span> timina, <span class="bs C">C</span> citosina, <span class="bs G">G</span> guanina. Nell’RNA la timina è sostituita dall’uracile, <span class="bs U">U</span>.</p>
+<div class="k">Regola dell’accoppiamento: <b>A con T</b> e <b>C con G</b>. Le due catene del DNA sono antiparallele e formano la doppia elica.</div>
+</section>
+
+<section id="scoperta" data-s="molecolare">
+<h2>La scoperta del DNA</h2>
+<p class="tg">Storia della doppia elica</p>
+<ul>
+<li><b>1869</b>: Friedrich Miescher isola dai globuli bianchi la «nucleina», cioè il DNA. Per molto tempo si credette che l’ereditarietà fosse affidata alle proteine.</li>
+<li><b>1952</b>: Linus Pauling propone una tripla elica con i fosfati al centro. Era sbagliato: i fosfati hanno carica negativa e si respingerebbero.</li>
+<li><b>Rosalind Franklin</b> ottiene immagini a raggi X del DNA, tra cui la celebre Foto 51: mostrano un’elica con lo scheletro zucchero-fosfato all’esterno. Anche Maurice Wilkins lavora sul problema.</li>
+<li><b>25 aprile 1953</b>: James Watson e Francis Crick pubblicano su <i>Nature</i> il modello della doppia elica, usando anche i dati di Franklin.</li>
+<li><b>1962</b>: Watson, Crick e Wilkins ricevono il Nobel per la Medicina. Franklin era morta nel 1958 e il Nobel non si assegna dopo la morte; oggi il suo contributo è riconosciuto come essenziale.</li>
+</ul>
+</section>
+
+<section id="rna" data-s="molecolare">
+<h2>DNA e RNA: l’archivio e il messaggero</h2>
+<p class="tg">Scala molecolare</p>
+<div class="tw"><table>
+<tr><th></th><th>DNA</th><th>RNA</th></tr>
+<tr><td>Nome</td><td>Acido deossiribonucleico</td><td>Acido ribonucleico</td></tr>
+<tr><td>Struttura</td><td>Doppio filamento, doppia elica</td><td>Di solito un solo filamento</td></tr>
+<tr><td>Zucchero</td><td>Deossiribosio</td><td>Ribosio</td></tr>
+<tr><td>Basi</td><td>A, <b>T</b>, C, G</td><td>A, <b>U</b>, C, G</td></tr>
+<tr><td>Ruolo</td><td>Custode delle istruzioni, soprattutto nel nucleo</td><td>Molecola operativa che viaggia, legge e costruisce proteine</td></tr>
+</table></div>
+<p>L’RNA fu identificato poco dopo il DNA, ma il suo ruolo si chiarì solo tra gli anni ’50 e ’60: fa da intermediario tra DNA e proteine. È il dogma centrale: <b class="m">DNA → RNA → proteina</b>.</p>
+<p>Tipi di RNA: l’<b>mRNA</b> porta il messaggio di un gene, il <b>tRNA</b> trasporta gli amminoacidi, l’<b>rRNA</b> costruisce i ribosomi, miRNA e siRNA regolano i geni.</p>
+</section>
+
+<section id="proteine" data-s="molecolare organismo">
+<h2>Sintesi proteica: la fabbrica molecolare</h2>
+<p class="tg">Scala molecolare</p>
+<ul>
+<li><b>Fase 1, trascrizione (nel nucleo)</b>: il DNA non può uscire, quindi l’RNA polimerasi ne fa una copia temporanea, l’mRNA.</li>
+<li><b>Fase 2, traduzione (nel citoplasma)</b>: il ribosoma legge l’mRNA tre lettere alla volta, i codoni.</li>
+<li><b>Fase 3, assemblaggio</b>: i tRNA portano l’amminoacido giusto grazie all’anticodone, complementare al codone. Gli amminoacidi si legano e formano la proteina. La lettura finisce a un codone di stop (UAA, UAG, UGA).</li>
+</ul>
+<p>Esempio: l’mRNA <b class="m">AUG GCU UAA</b> si legge così.</p>
+<div class="eq"><span class="A">AUG</span><span class="o">→</span><span>Metionina</span><span class="G">GCU</span><span class="o">→</span><span>Alanina</span><span class="T">UAA</span><span class="o">→</span><span>Stop</span></div>
+<svg class="sv" viewBox="0 0 720 360" role="img"><title>Il ribosoma e il collegamento tra gli amminoacidi</title><desc>Il ribosoma, formato da una subunità grande e una piccola, scorre sull’mRNA. I tRNA portano gli amminoacidi metionina e alanina, che si uniscono con un legame peptidico, mentre un terzo tRNA con la glicina sta arrivando.</desc>
+<g class="scn"><g class="rib"><text class="ts" x="235" y="86" text-anchor="middle">Subunità grande del ribosoma</text>
+<rect class="rb" x="145" y="95" width="180" height="130" rx="60"/>
+<rect class="rb" x="145" y="272" width="180" height="56" rx="28"/>
+<text class="ts" x="235" y="350" text-anchor="middle">Subunità piccola</text></g></g>
+<line class="rn" x1="30" y1="249" x2="690" y2="249"/>
+<text class="ts" x="30" y="236">mRNA</text>
+<rect class="cd" x="160" y="232" width="70" height="34" rx="6"/><text class="fa" x="195" y="254" text-anchor="middle">AUG</text>
+<rect class="cd" x="235" y="232" width="70" height="34" rx="6"/><text class="fg" x="270" y="254" text-anchor="middle">GCU</text>
+<rect class="cd" x="310" y="232" width="70" height="34" rx="6"/><text class="fc" x="345" y="254" text-anchor="middle">GGC</text>
+<rect class="cd" x="385" y="232" width="70" height="34" rx="6"/><text class="ft" x="420" y="254" text-anchor="middle">UAA</text>
+<g class="scn"><g class="t1"><line class="tr" x1="195" y1="212" x2="195" y2="158"/><rect class="cd" x="176" y="212" width="38" height="18" rx="4"/><text class="fs" x="195" y="226" text-anchor="middle" font-size="12">UAC</text>
+<circle class="aa" cx="195" cy="140" r="18"/><text class="fg" x="195" y="145" text-anchor="middle" font-size="13">Met</text></g>
+<line class="tr" x1="270" y1="212" x2="270" y2="158"/><rect class="cd" x="251" y="212" width="38" height="18" rx="4"/><text class="fs" x="270" y="226" text-anchor="middle" font-size="12">CGA</text>
+<circle class="aa" cx="270" cy="140" r="18"/><text class="fg" x="270" y="145" text-anchor="middle" font-size="13">Ala</text>
+<g class="b1"><line class="pep" x1="213" y1="140" x2="252" y2="140"/>
+<text class="ts" x="232" y="114" text-anchor="middle">legame peptidico</text></g>
+<g class="t3"><line class="tr" x1="345" y1="212" x2="345" y2="158"/><rect class="cd" x="326" y="212" width="38" height="18" rx="4"/><text class="fs" x="345" y="226" text-anchor="middle" font-size="12">CCG</text>
+<circle class="aa" cx="345" cy="140" r="18"/><text class="fg" x="345" y="145" text-anchor="middle" font-size="13">Gly</text>
+<text class="ts" x="345" y="108" text-anchor="middle">tRNA in arrivo</text></g>
+<g class="b2"><line class="pep" x1="288" y1="140" x2="327" y2="140"/></g></g>
+<text class="tb cp c1" x="10" y="30">1. Il legame peptidico unisce Met e Ala</text>
+<text class="tb cp c2" x="10" y="30">2. Il ribosoma scorre: il tRNA vuoto esce</text>
+<text class="tb cp c3" x="10" y="30">3. Arriva il tRNA con la glicina</text>
+<text class="tb cp c4" x="10" y="30">4. Nuovo legame: la catena si allunga</text>
+<text class="ft" x="420" y="288" text-anchor="middle" font-size="13">codone di stop</text>
+<text class="ts" x="470" y="318">Il ribosoma scorre →</text>
+</svg>
+<p class="tg">Schema semplificato, con un codone in più rispetto all’esempio.</p>
+<ul>
+<li>Ogni <b>tRNA</b> si appaia al codone con il suo anticodone (per esempio UAC con AUG) e porta il suo amminoacido.</li>
+<li>Il ribosoma unisce gli amminoacidi con un <b>legame peptidico</b>.</li>
+<li>Poi scorre di un codone: il tRNA ormai vuoto esce e ne entra uno nuovo. La catena si allunga finché non arriva il codone di stop.</li>
+</ul>
+</section>
+
+<section id="cromosomi" data-s="cellulare">
+<h2>Dentro la cellula: l’archivio dei cromosomi</h2>
+<p class="tg">Scala cellulare</p>
+<p>Il DNA è avvolto in lunghe molecole chiamate <b>cromosomi</b>, dentro il nucleo. Il <b>cariotipo</b> è l’insieme ordinato di tutti i cromosomi di una cellula.</p>
+<div class="g">
+<div class="c"><b>46 cromosomi</b>In 23 coppie di omologhi, uno dalla mamma e uno dal papà.</div>
+<div class="c"><b>22 coppie di autosomi</b>Le caratteristiche generali.</div>
+<div class="c p2"><b>1 coppia sessuale</b>XX nelle femmine, XY nei maschi.</div>
+</div>
+<h3>Meiosi e crossing-over: il motore della varietà</h3>
+<p>La meiosi parte da 1 cellula diploide (2n) e produce 4 cellule aploidi (n), i gameti, con 23 cromosomi singoli. Avviene in due divisioni: nella <b>meiosi I</b> si separano gli omologhi, nella <b>meiosi II</b> i cromatidi fratelli.</p>
+<p>Prima di separarsi, i cromosomi materno e paterno si «abbracciano» e si scambiano pezzi di DNA: è il <b>crossing-over</b>. Un cromosoma con gli alleli A e B può diventare A e b, mentre l’omologo passa da a e b ad a e B.</p>
+<div class="eq"><span class="C">A B</span><span class="U">a b</span><span class="o">→</span><span class="C">A b</span><span class="U">a B</span></div>
+<div class="k">Questo rimescolamento crea combinazioni uniche anche senza mutazioni: ecco perché non sei la copia esatta dei tuoi genitori o dei tuoi fratelli.</div>
+</section>
+
+<section id="mutazioni" data-s="molecolare cellulare organismo">
+<h2>Glitch nel codice: le mutazioni</h2>
+<p class="tg">Scala molecolare</p>
+<p>Una mutazione è un errore di battitura nel manuale del DNA. Può essere innocua, dannosa o vantaggiosa. Se avviene nelle cellule germinali si trasmette ai figli; nelle cellule somatiche no, ma può contribuire a un tumore.</p>
+<div class="tw"><table>
+<tr><th>Tipo</th><th>Che cosa cambia</th><th>Esempio</th></tr>
+<tr><td>Puntiforme</td><td>Una base ne sostituisce un’altra</td><td>A diventa G</td></tr>
+<tr><td>Inserzione</td><td>Si aggiungono basi</td><td>ABC diventa ABXC</td></tr>
+<tr><td>Delezione</td><td>Si perdono basi</td><td>ABC diventa AC</td></tr>
+<tr><td>Espansione di ripetizioni</td><td>Una breve sequenza si ripete troppo</td><td>CAG-CAG-CAG…</td></tr>
+<tr><td>Cromosomica</td><td>Cambia la struttura di un cromosoma</td><td>Perdita, duplicazione, inversione, traslocazione</td></tr>
+<tr><td>Genomica</td><td>Cambia il numero di cromosomi</td><td>Trisomia, monosomia</td></tr>
+</table></div>
+<h3>Che effetto ha sulla proteina?</h3>
+<ul>
+<li><b>Silenziosa</b>: il DNA cambia, ma l’amminoacido resta lo stesso.</li>
+<li><b>Missenso</b>: un amminoacido ne sostituisce un altro.</li>
+<li><b>Nonsense</b>: compare uno stop anticipato e la proteina è tagliata a metà.</li>
+<li><b>Frameshift</b>: un’inserzione o una delezione sposta la cornice di lettura e rovina tutta la sequenza successiva.</li>
+</ul>
+<h3>Quando il codice si inceppa: le malattie genetiche</h3>
+<div class="g">
+<div class="c"><b>Anemia falciforme</b>Mutazione puntiforme, recessiva. Deforma l’emoglobina e i globuli rossi a «falce».</div>
+<div class="c p2"><b>Fibrosi cistica</b>Gene CFTR, spesso una piccola delezione, recessiva. Muco denso che blocca polmoni e digestione.</div>
+<div class="c"><b>Corea di Huntington</b>Ripetizioni CAG, dominante. Basta una copia mutata per gravi problemi neurologici.</div>
+<div class="c p2"><b>Sindrome di Down</b>Mutazione genomica: trisomia 21, un cromosoma in più nella ventunesima coppia.</div>
+<div class="c"><b>Fenilchetonuria</b>Difetto nel metabolismo della fenilalanina; senza cura può danneggiare il cervello.</div>
+<div class="c p2"><b>Emofilia e Duchenne</b>Geni sul cromosoma X: sanguinamenti prolungati, debolezza muscolare progressiva.</div>
+<div class="c"><b>X fragile</b>Ripetizioni CGG: disabilità intellettiva.</div>
+<div class="c p2"><b>Sindrome di Turner</b>Monosomia dell’X nelle femmine.</div>
+<div class="c"><b>Talassemia</b>Mutazioni dei geni dell’emoglobina: anemia.</div>
+</div>
+<p><b>Come si ereditano:</b> autosomica dominante (basta una copia mutata), autosomica recessiva (servono due copie), legata all’X, oppure mitocondriale (di solito dalla madre).</p>
+<div class="k">Non tutte le variazioni del DNA sono malattie: molte sono semplici differenze, come il colore degli occhi.</div>
+</section>
+
+<section id="crispr" data-s="molecolare">
+<h2>CRISPR/Cas9: il taglia-e-cuci del DNA</h2>
+<p class="tg">Scala molecolare</p>
+<p>Nasce dal sistema di difesa dei batteri contro i virus. Nel 2012 Emmanuelle Charpentier e Jennifer Doudna lo trasformarono in uno strumento di laboratorio, e nel 2020 ricevettero il Nobel per la Chimica.</p>
+<ul>
+<li><b>RNA guida (il GPS)</b>: trova l’esatta sequenza da modificare.</li>
+<li><b>Cas9 (le forbici)</b>: taglia il DNA nel punto preciso.</li>
+<li><b>Riparazione (il cerotto)</b>: la cellula ripara il taglio. Spegnere un gene è semplice; per correggere una mutazione bisogna fornire anche la sequenza giusta da usare come modello.</li>
+</ul>
+</section>
+
+<section id="pc" data-s="globale">
+<h2>Diventa un genetista digitale</h2>
+<p class="tg">Scala globale · strumenti di bioinformatica</p>
+<p>Questi strumenti si possono usare davvero dal computer. <a class="bk" href="#laboratorio">Prova il laboratorio guidato →</a></p>
+<div class="g">
+<a class="c" href="https://www.ncbi.nlm.nih.gov/" target="_blank" rel="noopener"><b>NCBI</b>L’archivio globale: cerca un gene, per esempio INS per l’insulina, e scarica le sequenze.<br><small>Sito web</small></a>
+<a class="c p2" href="https://ormbunkar.se/aliview/" target="_blank" rel="noopener"><b>AliView</b>Allinea le sequenze (FASTA) e colora le differenze tra specie diverse.<br><small>Da installare, gratuito</small></a>
+<a class="c" href="https://igv.org/app/" target="_blank" rel="noopener"><b>IGV-Web</b>Il «Google Maps» del genoma: zoom sui cromosomi fino ai geni.<br><small>Sito web</small></a>
+<a class="c p2" href="https://ugene.net/" target="_blank" rel="noopener"><b>UGENE</b>Analizza sequenze e confronta due genomi con il dot plot.<br><small>Da installare, gratuito</small></a>
+<a class="c" href="https://www.medicalexpo.it/fabbricante-medico/software-sequenziamento-dna-57529.html" target="_blank" rel="noopener"><b>MedicalExpo</b>Catalogo dei software professionali per il sequenziamento.<br><small>Sito web</small></a>
+</div>
+</section>
+
+<section id="sintesi" data-s="organismo">
+<h2>La sintesi: il flusso dell’informazione</h2>
+<p class="tg">Scala organismo</p>
+<div class="eq"><span>DNA</span><span class="o">→</span><span>Trascrizione</span><span class="o">→</span><span>RNA</span><span class="o">→</span><span>Traduzione</span><span class="o">→</span><span>Proteina</span><span class="o">→</span><span>Fenotipo</span></div>
+<p>Tutto è collegato: le regole scoperte da Mendel nei piselli sono il risultato visibile di proteine costruite seguendo la sequenza del DNA, inviata tramite RNA. Nei gameti, la meiosi passa questo codice alla generazione successiva.</p>
+<div class="k"><b>Il futuro è nelle tue mani.</b> In poco più di cento anni siamo passati dal non capire perché i fiori cambiassero colore all’essere in grado di riscrivere il DNA. Ora hai la mappa, gli strumenti digitali e le conoscenze. Continua a esplorare!</div>
+</section>
+<div class="k"><b>Pronto a metterti alla prova?</b> <a href="#esercitazioni">Vai alle esercitazioni →</a> · <a href="#laboratorio">Laboratorio al computer →</a></div>
+</div>
+<div id="vE" hidden>
+<p style="margin-top:22px"><a class="bk" href="#studio">← Torna allo studio</a></p>
+<section id="esercizi" data-s="globale organismo cellulare molecolare">
+<h2>Esercitazioni</h2>
+<p class="tg">Metti alla prova quello che hai imparato</p>
+<h3>Esercizi sul quadrato di Punnett</h3>
+<p>In tutti gli esercizi A è l’allele dominante e a quello recessivo. Disegna il quadrato sul quaderno, poi scegli la risposta.</p>
+<div id="e1"></div><p id="e1p" class="m" style="font-weight:700"></p>
+<h3>Esercizio a sorpresa</h3>
+<p>I genitori vengono scelti a caso: puoi ripetere quante volte vuoi.</p>
+<div id="gen"></div><button class="bt" id="gb">Nuovo esercizio</button>
+<h3>Trova la sequenza complementare</h3>
+<p>Nel DNA le basi si accoppiano così: <b>A con T</b> e <b>C con G</b>. Scrivi il filamento complementare di ogni sequenza, usando solo le lettere A, T, C, G.</p>
+<div id="dn"></div><p id="dnp" class="m" style="font-weight:700"></p>
+<h3>Sequenza a sorpresa</h3>
+<div id="dg"></div><button class="bt" id="dgb">Nuova sequenza</button>
+<h3>Esercizi sulle mutazioni</h3>
+<p>Confronta l’mRNA originale con quello mutato, trova la differenza e scegli di che tipo di mutazione si tratta.</p>
+
+<div id="mu"></div>
+<h3>Domande di teoria</h3>
+<div id="e2"></div><p id="e2p" class="m" style="font-weight:700"></p>
+</section>
+</div>
+<div id="vL" hidden>
+<p style="margin-top:22px"><a class="bk" href="#studio">← Torna allo studio</a></p>
+<section class="lab" id="lab" data-s="globale organismo cellulare molecolare">
+<h2>Laboratorio al computer</h2>
+<p class="tg">Compito pratico · confronta il gene dell’insulina di tre specie</p>
+<p>Oggi fai il genetista: scarichi da NCBI il gene dell’insulina (INS) di tre animali, li confronti con AliView e scopri quale somiglia di più a quello umano.</p>
+<div class="g">
+<a class="c" href="https://www.ncbi.nlm.nih.gov/" target="_blank" rel="noopener"><b>NCBI</b>Per cercare e scaricare le sequenze.<br><small>Sito web</small></a>
+<a class="c p2" href="https://ormbunkar.se/aliview/" target="_blank" rel="noopener"><b>AliView</b>Per allineare le sequenze e vedere le differenze.<br><small>Da scaricare e installare, gratuito</small></a>
+<div class="c"><b>Ti serve anche</b>Un editor di testo, per esempio il Blocco note.</div>
+</div>
+<p class="tg">Gli schemi sono semplificati: i menu reali possono cambiare un po’ da una versione all’altra.</p>
+<ol class="st">
+<li><p><b>Cerca il gene su NCBI.</b> Apri il sito, scegli <b>Gene</b> nel menu a tendina, scrivi <b>INS human</b> e premi Search. Il primo risultato è il gene dell’insulina dell’uomo.</p>
+<div class="scr"><div class="sh">ncbi.nlm.nih.gov</div><div class="bd"><span class="fk on">Gene ▾</span><span class="fk">INS human</span><span class="fk mg">Search</span></div><div class="bd" style="border-top:1px solid var(--line)"><span><b>INS</b> insulin [<i>Homo sapiens</i> (human)]</span></div></div></li>
+<li><p><b>Apri la sequenza.</b> Nella pagina del gene cerca la sezione <b>NCBI Reference Sequences (RefSeq)</b> e clicca sul codice che inizia con <b>NM_</b>: è la sequenza dell’mRNA.</p>
+<div class="scr"><div class="sh">Pagina del gene INS</div><div class="bd" style="display:block"><div class="fk" style="margin-bottom:8px">NCBI Reference Sequences (RefSeq)</div><div>→ <span class="fk mg">NM_…</span> mRNA</div></div></div></li>
+<li><p><b>Scarica in formato FASTA.</b> In alto a destra clicca <b>Send to</b>, poi Complete Record, File, formato FASTA e Create File.</p>
+<div class="scr"><div class="sh">Pagina della sequenza</div><div class="bd"><span class="fk on">Send to ▾</span>→<span class="fk">Complete Record</span>→<span class="fk">File</span>→<span class="fk">Format: FASTA</span>→<span class="fk mg">Create File</span></div></div></li>
+<li><p><b>Ripeti per altre due specie.</b> Cerca <b>INS pig</b> (maiale) e <b>INS cow</b> (mucca). Controlla sempre il nome della specie tra parentesi quadre. Alla fine hai tre file.</p></li>
+<li><p><b>Unisci i file.</b> Copia il contenuto dei tre file in un solo file di testo, chiamato <b>insulina.fasta</b>. Ogni sequenza deve iniziare con una riga che comincia con il simbolo <b>&gt;</b>.</p>
+<div class="scr"><div class="sh">insulina.fasta</div><div class="bd" style="display:block;font:14px/1.6 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap">&gt;Homo sapiens INS
+ATGGCCCTGTGG…
+&gt;Sus scrofa INS
+ATGGCC…
+&gt;Bos taurus INS
+ATGGCC…</div></div></li>
+<li><p><b>Apri il file in AliView.</b> Avvia il programma, scegli <b>File</b> → <b>Open File</b> e seleziona insulina.fasta. Vedrai una riga per ogni specie, con le basi colorate.</p></li>
+<li><p><b>Allinea le sequenze.</b> Se non sono incolonnate, usa il menu <b>Align</b>: AliView usa il programma MUSCLE. Il segno − indica uno spazio (gap) dove manca una lettera. Le colonne evidenziate sono quelle in cui le lettere non sono tutte uguali.</p>
+<div class="scr"><div class="sh">AliView · insulina.fasta (schema con lettere di esempio)</div><div class="bd" id="al" style="display:block;font:700 15px ui-monospace,Menlo,Consolas,monospace;letter-spacing:2px;overflow-x:auto;white-space:nowrap"></div></div></li>
+</ol>
+<h3>Il tuo compito</h3>
+<ul>
+<li>Scorri le prime 60 colonne e conta le differenze tra uomo e maiale, poi tra uomo e mucca. Quale specie è più simile all’uomo?</li>
+<li>Scegli una differenza: è una sostituzione? Quale lettera è cambiata in quale?</li>
+<li>Trovi qualche gap (−)? Dice che c’è stata un’inserzione o una delezione?</li>
+<li>Bonus: prova a confrontare altre specie, oppure due genomi interi con UGENE.</li>
+</ul>
+</section>
+</div>
+<footer>Il tuo Professore di Scienze &amp; Genetista</footer>
+</div>
+<script>
+function pun(){
+  var a=document.getElementById('p1').value,b=document.getElementById('p2').value,v=0,h='<div></div><div><b>'+a[0]+'</b></div><div><b>'+a[1]+'</b></div>';
+  for(var i=0;i<2;i++){h+='<div style="padding-top:12px"><b>'+b[i]+'</b></div>';for(var j=0;j<2;j++){var s=[a[j],b[i]].sort().join(''),d=s.indexOf('A')>=0;if(d)v++;h+='<div style="border:1px solid '+(d?'var(--mg)':'var(--cy)')+';color:'+(d?'var(--mg)':'var(--cy)')+'"><b>'+s+'</b><br><small>'+(d?'viola':'bianco')+'</small></div>';}}
+  document.getElementById('pg').innerHTML=h;
+  document.getElementById('pr').textContent='Probabilità per ogni figlio: viola '+v*25+'%, bianco '+(100-v*25)+'%.';
+}
+document.getElementById('p1').onchange=pun;document.getElementById('p2').onchange=pun;pun();
+var bt=document.querySelectorAll('.bar button'),sc=document.querySelectorAll('section');
+bt.forEach(function(b){b.onclick=function(){
+  bt.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+  var k=b.getAttribute('data-s');
+  sc.forEach(function(s){s.hidden=!(k==='tutto'||s.getAttribute('data-s').split(' ').indexOf(k)>=0)});
+  window.scrollTo(0,0);
+}});
+var PQ=[
+{q:'Mamma eterozigote (Aa) e papà eterozigote (Aa). Qual è la probabilità che il figlio sia omozigote recessivo (aa) per quel carattere?',o:['0%','25%','50%','75%'],a:1,e:'Aa × Aa dà AA, Aa, Aa, aa: una sola casella su quattro è aa, cioè il 25%.'},
+{q:'Mamma Aa e papà Aa. Qual è la probabilità che il figlio mostri il carattere dominante?',o:['25%','50%','100%','75%'],a:3,e:'Tre caselle su quattro (AA, Aa, Aa) contengono almeno una A: 75%.'},
+{q:'Mamma omozigote dominante (AA) e papà omozigote recessivo (aa). Come saranno i figli?',o:['Tutti AA','Metà AA e metà aa','Tutti Aa','Tutti aa'],a:2,e:'Ogni figlio riceve una A dalla mamma e una a dal papà: sono tutti Aa e mostrano il carattere dominante (prima legge di Mendel).'},
+{q:'Mamma eterozigote (Aa) e papà omozigote recessivo (aa). Qual è la probabilità che il figlio sia aa?',o:['0%','25%','50%','100%'],a:2,e:'Le caselle sono Aa, Aa, aa, aa: due su quattro, cioè il 50%.'},
+{q:'Mamma omozigote dominante (AA) e papà eterozigote (Aa). Qual è la probabilità che il figlio sia omozigote recessivo (aa)?',o:['25%','50%','75%','0%'],a:3,e:'La mamma dà sempre una A: i figli sono AA o Aa, mai aa.'},
+{q:'Due genitori dagli occhi castani (Aa) hanno più figli (A = castani, a = azzurri). Quale affermazione è corretta?',o:['Tutti i figli avranno gli occhi castani','Ogni figlio ha il 25% di probabilità di avere gli occhi azzurri','Il quarto figlio avrà sicuramente gli occhi azzurri','Nessun figlio può avere gli occhi azzurri'],a:1,e:'La probabilità vale per ogni singolo figlio ed è indipendente dagli altri: 25% di aa.'}
+];
+var TQ=[
+{q:'Che cos’è un allele?',o:['Un tipo di cromosoma','Una versione diversa dello stesso gene','Una base azotata','Una proteina del ribosoma'],a:1,e:'Ogni gene può avere versioni diverse, chiamate alleli.'},
+{q:'Nella seconda legge di Mendel, incrociando due eterozigoti, qual è il rapporto tra carattere dominante e recessivo nella F2?',o:['1:1','2:1','3:1','4:1'],a:2,e:'Tre figli su quattro mostrano il carattere dominante e uno il recessivo.'},
+{q:'Quale base si trova nell’RNA ma non nel DNA?',o:['Timina','Guanina','Citosina','Uracile'],a:3,e:'Nell’RNA l’uracile (U) prende il posto della timina (T).'},
+{q:'Dove avviene la trascrizione?',o:['Nel ribosoma','Nel nucleo','Nella membrana della cellula','Nel lisosoma'],a:1,e:'Nel nucleo l’RNA polimerasi copia un gene in mRNA.'},
+{q:'Che cos’è un codone?',o:['Una molecola di tRNA','Un enzima del ribosoma','Un gruppo di tre basi dell’mRNA che indica un amminoacido','Un tratto di DNA di due basi'],a:2,e:'Il ribosoma legge l’mRNA tre basi alla volta.'},
+{q:'Che cosa fa il crossing-over?',o:['Duplica il DNA prima della divisione','Scambia pezzi di DNA tra cromosomi omologhi','Trasforma il DNA in RNA','Elimina i cromosomi in più'],a:1,e:'Lo scambio crea nuove combinazioni di alleli anche senza mutazioni.'},
+{q:'Quanti cromosomi ha una cellula del corpo umano?',o:['23','44','46','92'],a:2,e:'46 cromosomi in 23 coppie: 22 di autosomi e una di cromosomi sessuali.'},
+{q:'Che cosa provoca una mutazione frameshift?',o:['Lo spostamento della cornice di lettura, per inserzione o delezione di basi','Un cromosoma in più','La sostituzione di una base con un’altra','Lo stop della sintesi proteica senza altri danni'],a:0,e:'Cambiano tutti gli amminoacidi successivi alla mutazione.'},
+{q:'Chi pubblicò il modello della doppia elica nel 1953?',o:['Mendel e Pauling','Miescher e Franklin','Charpentier e Doudna','Watson e Crick'],a:3,e:'Watson e Crick, usando anche le immagini a raggi X di Rosalind Franklin.'},
+{q:'Quale condizione è causata dalla trisomia 21?',o:['Fibrosi cistica','Sindrome di Down','Anemia falciforme','Corea di Huntington'],a:1,e:'Un cromosoma 21 in più è una mutazione genomica.'}
+];
+function card(x,n,cb){
+  var d=document.createElement('div');d.className='ex';
+  d.innerHTML='<p>'+(n?'<b>'+n+'.</b> ':'')+x.q+'</p><div class="op"></div><p class="fb"></p>';
+  var op=d.querySelector('.op'),fb=d.querySelector('.fb'),done=false;
+  x.o.forEach(function(t,i){var b=document.createElement('button');b.textContent=t;b.onclick=function(){if(done)return;done=true;var ok=i===x.a;b.className=ok?'ok':'no';op.children[x.a].className='ok';fb.textContent=(ok?'Esatto! ':'Non proprio. ')+x.e;if(cb)cb(ok)};op.appendChild(b)});
+  return d}
+function mk(id,list){var box=document.getElementById(id),pt=document.getElementById(id+'p'),s=0;list.forEach(function(x,n){box.appendChild(card(x,n+1,function(ok){if(ok)s++;pt.textContent='Punteggio: '+s+' / '+list.length}))})}
+function gen(){
+  var g=['AA','Aa','aa'],nm={AA:'omozigote dominante (AA)',Aa:'eterozigote (Aa)',aa:'omozigote recessivo (aa)'},m=g[Math.floor(Math.random()*3)],p=g[Math.floor(Math.random()*3)],t=Math.floor(Math.random()*3),k=0,qs=['sia omozigote recessivo (aa)','sia eterozigote (Aa)','mostri il carattere dominante'];
+  for(var i=0;i<2;i++)for(var j=0;j<2;j++){var f=m[i]+p[j];if(t===0&&f==='aa')k++;if(t===1&&(f==='Aa'||f==='aA'))k++;if(t===2&&f.indexOf('A')>=0)k++}
+  var b=document.getElementById('gen');b.innerHTML='';
+  b.appendChild(card({q:'Mamma '+nm[m]+' e papà '+nm[p]+'. Qual è la probabilità che il figlio '+qs[t]+'?',o:['0%','25%','50%','75%','100%'],a:k,e:'Nel quadrato di Punnett '+m+' × '+p+' '+k+' caselle su 4 corrispondono: '+k*25+'%.'},'',null))}
+var CM={A:'T',T:'A',C:'G',G:'C'};
+function comp(s){return s.split('').map(function(c){return CM[c]}).join('')}
+function col(s){return s.split('').map(function(c){return '<span class="'+c+'">'+c+'</span>'}).join('')}
+function dcard(seq,n,cb){
+  var d=document.createElement('div');d.className='ex';var w=comp(seq),tr=0;
+  d.innerHTML='<p>'+(n?'<b>'+n+'.</b> ':'')+'Filamento di DNA: <span class="bs">'+col(seq)+'</span><br>Scrivi il filamento complementare.</p><p><input type="text" maxlength="'+seq.length+'" autocomplete="off" autocapitalize="characters" aria-label="Filamento complementare" style="font:700 18px ui-monospace,Menlo,Consolas,monospace;letter-spacing:3px;text-transform:uppercase;width:'+(seq.length*1.3+3)+'em;max-width:100%;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--pan);color:var(--ink)"> <button class="bt" style="margin:0 0 0 8px">Controlla</button></p><p class="fb"></p>';
+  var inp=d.querySelector('input'),bt=d.querySelector('button'),fb=d.querySelector('.fb'),done=false;
+  bt.onclick=function(){
+    if(done)return;
+    var v=inp.value.toUpperCase().replace(/[^ATCG]/g,'');
+    if(v.length!==seq.length){fb.style.color='var(--rd)';fb.textContent='Servono '+seq.length+' lettere (A, T, C, G).';return}
+    if(v===w){done=true;fb.style.color='var(--gr)';fb.innerHTML='Esatto! <span class="bs">'+col(w)+'</span> Ogni base è accoppiata correttamente.';if(cb)cb(true)}
+    else{
+      tr++;var e=0;for(var i=0;i<v.length;i++)if(v[i]!==w[i])e++;
+      fb.style.color='var(--rd)';
+      if(tr<2){fb.textContent='Non ancora: '+e+(e===1?' lettera è sbagliata':' lettere sono sbagliate')+'. Ricorda: A con T, C con G.'}
+      else{done=true;fb.innerHTML='La risposta giusta è <span class="bs">'+col(w)+'</span>. Ricorda: A con T, C con G.';if(cb)cb(false)}
+    }
+  };
+  return d}
+var DQ=['ATGC','TTAGCC','GGCATAC','ATGGCTAAC','CCGATTAGGC'];
+function mkd(){var box=document.getElementById('dn'),pt=document.getElementById('dnp'),s=0;DQ.forEach(function(q,n){box.appendChild(dcard(q,n+1,function(ok){if(ok)s++;pt.textContent='Corrette: '+s+' / '+DQ.length}))})}
+function dgen(){var s='',l=6+Math.floor(Math.random()*4);for(var i=0;i<l;i++)s+='ATCG'[Math.floor(Math.random()*4)];var b=document.getElementById('dg');b.innerHTML='';b.appendChild(dcard(s,'',null))}
+document.getElementById('dgb').onclick=dgen;dgen();mkd();
+var TY=['Sostituzione','Inserzione','Delezione'],EF=['Silenziosa','Missenso','Nonsense','Frameshift'];
+var MQ=[
+{o:'AUGGCUAAAUUUUAA',m:'AUGGCCAAAUUUUAA',t:0,f:0,te:'Nel secondo codone una U è diventata C: una lettera è stata sostituita.',fe:'GCU e GCC codificano entrambi l’alanina, quindi la proteina resta uguale: mutazione silenziosa.'},
+{o:'AUGGCUAAAUUUUAA',m:'AUGGCUGAAUUUUAA',t:0,f:1,te:'La prima lettera del terzo codone è passata da A a G: sostituzione.',fe:'AAA (lisina) è diventato GAA (acido glutammico): cambia un amminoacido, quindi è missenso.'},
+{o:'AUGGCUAAAUUUUAA',m:'AUGGCUUAAUUUUAA',t:0,f:2,te:'La prima lettera del terzo codone è passata da A a U: sostituzione.',fe:'AAA è diventato UAA, un codone di stop: la proteina si ferma dopo metionina e alanina (nonsense).'},
+{o:'AUGGCUAAAUUUUAA',m:'AUGGCUAAUUUUAA',t:2,f:3,te:'Manca una A: la serie AAA è diventata AA. È una delezione.',fe:'Da lì in poi i codoni cambiano: AUG GCU AAU UUU AA… La cornice di lettura si sposta (frameshift) e il codone di stop si perde.'},
+{o:'AUGGCUAAAUUUUAA',m:'AUGGCUAAAGUUUUAA',t:1,f:3,te:'Dopo AAA è comparsa una G in più: è un’inserzione.',fe:'I codoni diventano AUG GCU AAA GUU UUA A…: tutti gli amminoacidi dopo la lisina cambiano (frameshift).'}
+];
+function mkm(){var box=document.getElementById('mu');MQ.forEach(function(x,n){var d=document.createElement('div');d.className='ex';d.innerHTML='<p><b>'+(n+1)+'.</b> mRNA originale: <span class="bs">'+col(x.o)+'</span><br>mRNA mutato: <span class="bs">'+col(x.m)+'</span></p>';d.appendChild(card({q:'Che tipo di mutazione è?',o:TY,a:x.t,e:x.te},'',null));box.appendChild(d)})}
+mkm();
+var AL=[['Uomo','ATGGCCCTGTGGATGCGCCTC'],['Maiale','ATGGCCCTGTGGACGCGCCTC'],['Mucca','ATGGCCCTGTGGATG---CTC']];
+(function(){var r=AL.map(function(a){var h='<div><span style="display:inline-block;width:72px;font-weight:400;color:var(--mut)">'+a[0]+'</span>';for(var i=0;i<a[1].length;i++){var c=a[1][i],d=AL.some(function(b){return b[1][i]!==c});h+='<span class="'+(c==='-'?'':c)+(d?' df':'')+'">'+c+'</span>'}return h+'</div>'}).join('');document.getElementById('al').innerHTML=r})();
+document.getElementById('gb').onclick=gen;gen();mk('e1',PQ);mk('e2',TQ);
+function route(){var h=location.hash.slice(1),e=h==='esercitazioni',l=h==='laboratorio',o=e||l;document.getElementById('vS').hidden=o;document.getElementById('vE').hidden=!e;document.getElementById('vL').hidden=!l;document.getElementById('scl').style.display=o?'none':'contents';document.getElementById('lL').setAttribute('aria-current',l?'page':'false');document.getElementById('lS').setAttribute('aria-current',o?'false':'page');document.getElementById('lE').setAttribute('aria-current',e?'page':'false');if(o||!h||h==='studio'){window.scrollTo(0,0)}else{var t=document.getElementById(h);if(t)t.scrollIntoView()}}
+window.addEventListener('hashchange',route);route();
+</script>
+</body>
+</html>
